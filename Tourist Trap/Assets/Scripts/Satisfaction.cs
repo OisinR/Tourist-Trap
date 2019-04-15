@@ -9,7 +9,7 @@ public class Satisfaction : MonoBehaviour
     Score scoreScript;
     DestinationChooser destChooser;
     NavMeshAgent agent;
-    float satisfaction;
+    public float satisfaction;
     float decayRate;
     Text satisfactionText;
     public bool display;
@@ -22,7 +22,7 @@ public class Satisfaction : MonoBehaviour
         destChooser = GetComponent<DestinationChooser>();
         agent = GetComponent<NavMeshAgent>();
         satisfactionText = GameObject.FindGameObjectWithTag("Satisfaction").GetComponent<Text>();
-        decayRate = 1f;
+        decayRate = 5f;
         satisfaction = 100;
     }
 
@@ -50,6 +50,11 @@ public class Satisfaction : MonoBehaviour
         if(going)
         {
             satisfaction -= decayRate * 0.1f * Time.deltaTime;
+        }
+
+        if (satisfaction <= 0)
+        {
+            satisfaction = 0;
         }
 
         if (display)
