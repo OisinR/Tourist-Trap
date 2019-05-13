@@ -8,11 +8,10 @@ public class SetWaypoint : MonoBehaviour
     public GameObject prefab;
     GameObject destination;
     MoveToWaypoint waypointScript;
-    Renderer currentCube;
+    SelectedGroup currentGroup;
     public Material player, selected, waypointSelected, waypointUnselected;
     bool first = true;
-    DestinationChooser destChoose;
-    Satisfaction satScript;
+    GameObject destinationWaypoint;
 
     private void Start()
     {
@@ -21,7 +20,7 @@ public class SetWaypoint : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
             Ray ray = screenCamera.ScreenPointToRay(Input.mousePosition);
@@ -31,36 +30,29 @@ public class SetWaypoint : MonoBehaviour
             {
                 if (waypointScript != null)
                 {
-                    //Debug.Log("LC");
-                    if (waypointScript.waypoint != null)
+                    if (waypointScript.waypoint != null && waypointScript.waypoint.layer != 11)
                     {
                         Destroy(waypointScript.waypoint);
                     }
                     destination = Instantiate(prefab, hit.point, Quaternion.identity);
-                    waypointScript.waypoint = destination;
-                    waypointScript.waypoint.GetComponent<Renderer>().material = waypointSelected;
+                    currentGroup.destinationWaypoint = destination;
+                    currentGroup.Selected();
+                   // waypointScript.waypoint.GetComponent<Renderer>().material = waypointSelected;
                 }
             }
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0)) //Rightclick
         {
-            //Debug.Log("RC1");
             RaycastHit hit;
             Ray ray = screenCamera.ScreenPointToRay(Input.mousePosition);
             int layerMask = 1 << 10;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
             {
-                //Debug.Log(hit);
                 if (first)
                 {
                     first = false;
-                    destChoose = hit.transform.gameObject.GetComponent<DestinationChooser>();
-                    destChoose.selected = true;
-                    currentCube = hit.transform.gameObject.GetComponent<Renderer>();
-                    currentCube.material = selected;
-                    satScript = hit.transform.gameObject.GetComponent<Satisfaction>();
-                    satScript.display = true;
-                    
+                    currentGroup = hit.transform.parent.gameObject.GetComponent<SelectedGroup>();
+                    currentGroup.Selected();
                 }
                 else
                 {
@@ -68,20 +60,16 @@ public class SetWaypoint : MonoBehaviour
                     {
                         waypointScript.waypoint.GetComponent<Renderer>().material = waypointUnselected;
                     }
-                    satScript.display = false;
-                    destChoose.selected = false;
-                    destChoose = hit.transform.gameObject.GetComponent<DestinationChooser>();
-                    destChoose.selected = true;
-                    if (currentCube != null)
+                    if(currentGroup != null)
                     {
-                        currentCube.material = player;
+                        currentGroup.UnSelected();
+
                     }
-                    currentCube = hit.transform.gameObject.GetComponent<Renderer>();
-                    currentCube.material = selected;
-                    satScript = hit.transform.gameObject.GetComponent<Satisfaction>();
-                    satScript.display = true;
+
+                    currentGroup = hit.transform.parent.gameObject.GetComponent<SelectedGroup>();
+                    currentGroup.Selected();
                 }
-                waypointScript = hit.transform.gameObject.GetComponent<MoveToWaypoint>();
+                waypointScript = hit.transform.parent.gameObject.GetComponent<MoveToWaypoint>();
                 if (waypointScript.waypoint != null)
                 {
                     waypointScript.waypoint.GetComponent<Renderer>().material = waypointSelected;

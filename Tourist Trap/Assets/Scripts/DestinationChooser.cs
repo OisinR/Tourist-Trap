@@ -5,24 +5,26 @@ using UnityEngine.UI;
 public class DestinationChooser : MonoBehaviour
 {
     MoveToWaypoint waypointScript;
-    Spawn spawnScript;
     LineRenderer line;
     Satisfaction satScript;
-    string[] placestoGo = {"Red","Purple","Yellow","Blue" };
+    ExitMap exitMapScript;
+    string[] placestoGo = {"Gazebo","Statue","Fountain","Stone Head" };
     Text uiText;
     public string destination;
     public bool selected;
     public bool reached;
-
+    GameObject lookPoint;
     void Awake()
     {
+        
         line = GetComponent<LineRenderer>();
         waypointScript = GetComponent<MoveToWaypoint>();
         satScript = GetComponent<Satisfaction>();
-        spawnScript = GameObject.FindGameObjectWithTag("Manager").GetComponent<Spawn>();
+        exitMapScript = GetComponent<ExitMap>();
         destination = placestoGo[Random.Range(0, 4)];
         selected = false;
         uiText = GameObject.FindGameObjectWithTag("Destination").GetComponent<Text>();
+        
     }
 
     
@@ -30,11 +32,11 @@ public class DestinationChooser : MonoBehaviour
     {
         if (selected)
         {
-            uiText.text = "Destination: " + destination;
+            uiText.text = "" + destination;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void TriggerReached(Collider other)
     {
         if (other.tag == destination)
         {
@@ -45,10 +47,13 @@ public class DestinationChooser : MonoBehaviour
 
         if (other.tag == "Gate" && reached)
         {
-            satScript.addScore();
-            //Debug.Log("Out");
-            Destroy(waypointScript.waypoint);
-            line.enabled = false;
+            Debug.Log("Exit Attempted");
+            lookPoint = other.GetComponent<ExitMapInfo>().GetInfo();
+            exitMapScript.Exit(lookPoint);
+        }
+
+        if (other.tag == "DespawnPoint" && reached)
+        {
             Destroy(gameObject);
         }
     }

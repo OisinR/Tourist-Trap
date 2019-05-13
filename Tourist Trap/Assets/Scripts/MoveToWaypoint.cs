@@ -6,36 +6,73 @@ public class MoveToWaypoint : MonoBehaviour
 {
     public GameObject waypoint;
     NavMeshAgent agent;
-    DrawNavMeshPath drawScript;
     Collider col;
+
+    Animator[] animators;
     bool safe;
-    void Awake()
+    public int key;
+    private void Awake()
     {
-        drawScript = GetComponent<DrawNavMeshPath>();
-        agent = GetComponent<NavMeshAgent>();
+        animators = GetComponentsInChildren<Animator>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if(waypoint != null)
+        if (waypoint != null && agent != null)
         {
+
+
             agent.SetDestination(waypoint.transform.position);
-            DrawNavMeshPath.path = agent.path.corners;
-        }  
+            GetComponent<DrawNavMeshPath>().ShowPath(agent.path.corners);
+
+
+
+            foreach (Animator anim in animators)
+            {
+                if (Vector3.Distance(anim.gameObject.transform.position, waypoint.gameObject.transform.position) > 1f)
+                {
+                    anim.SetBool("Walking", true);
+                }
+                else
+                {
+                    anim.SetBool("Walking", false);
+                }
+            }
+        }
+
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == waypoint)
+        if (other == waypoint && other.gameObject.layer != 9)
         {
             Destroy(other.gameObject);
 
         }
-        if (other.tag == "SafeZone")
+        if (other.tag == "SafeZone" || other.tag == "Gate")
         {
             
             safe = true;
+        }
+
+        gameObject.GetComponentInParent<DestinationChooser>().TriggerReached(other);
+
+
+
+
+
+
+        if (other.gameObject.tag == "Tourist" && !safe)
+        {
+            if(other.gameObject.GetComponent<MoveToWaypoint>().key != key)
+            {
+                Debug.Log("End");
+
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<Spawn>().gameover = true;
+            }
+
         }
     }
 
@@ -50,9 +87,11 @@ public class MoveToWaypoint : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Debug.Log("Col");
         if (collision.gameObject.tag == "Tourist" && !safe)
         {
-            GameObject.FindGameObjectWithTag("Manager").GetComponent<Spawn>().gameover = true;
+            //Debug.Log("End");
+            //GameObject.FindGameObjectWithTag("Manager").GetComponent<Spawn>().gameover = true;
         }
     }
 

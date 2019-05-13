@@ -16,11 +16,13 @@ public class Satisfaction : MonoBehaviour
     public bool waiting,going,atDest;
     //to do later: replace these with states 
 
+
     void Awake()
     {
+
         scoreScript = GameObject.FindGameObjectWithTag("Manager").GetComponent<Score>();
         destChooser = GetComponent<DestinationChooser>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponentInChildren<NavMeshAgent>();
         satisfactionText = GameObject.FindGameObjectWithTag("Satisfaction").GetComponent<Text>();
         decayRate = 5f;
         satisfaction = 100;
@@ -29,15 +31,17 @@ public class Satisfaction : MonoBehaviour
 
     void Update()
     {
-        if (agent.hasPath)
+        if (agent != null && agent.hasPath)
         {
             going = true;
             waiting = false;
+
         }
         else
         {
             going = false;
-            waiting = true;
+            StartCoroutine(DecayDelay());
+
         }
 
 
@@ -59,7 +63,7 @@ public class Satisfaction : MonoBehaviour
 
         if (display)
         {
-            satisfactionText.text = "Satisfaction: " + (int)satisfaction;
+            satisfactionText.text = "" + (int)satisfaction;
         }
     }
 
@@ -85,5 +89,12 @@ public class Satisfaction : MonoBehaviour
     public void addScore()
     {
         scoreScript.displayScore(satisfaction);
+    }
+
+
+    IEnumerator DecayDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        waiting = true;
     }
 }

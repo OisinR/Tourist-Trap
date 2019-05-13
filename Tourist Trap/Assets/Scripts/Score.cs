@@ -31,8 +31,8 @@ public class Score : MonoBehaviour
             {
                 highscore = score;
             }
-            highScoreText.text = "Highscore: " + highscore + "  ";           
-            scoreText.text = "Score: " + score + "  ";
+            highScoreText.text = highscore + "";           
+            scoreText.text = score + "";
 
             
         }

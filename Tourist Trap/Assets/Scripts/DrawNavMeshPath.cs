@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DrawNavMeshPath : MonoBehaviour
 {
-    public static Vector3[] path = new Vector3[0];
+    Vector3[] path = new Vector3[0];
 
-    private LineRenderer lr;
+    LineRenderer lr;
 
     void Start()
     {
@@ -24,4 +24,11 @@ public class DrawNavMeshPath : MonoBehaviour
             }
         }
     }
+
+    public void ShowPath(Vector3[] import)
+    {
+
+        path = import;
+    }
+
 }
