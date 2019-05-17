@@ -38,7 +38,7 @@ public class Score : MonoBehaviour
         }
         else
         {
-            if(score > PlayerPrefs.GetInt("Highscore"))
+            if(score > PlayerPrefs.GetInt("Highscore"))                         //sets a new Highscore if the current sore is bigger than the old
             {
                 highscore = score;
                 PlayerPrefs.SetInt("Highscore",highscore);

@@ -8,7 +8,7 @@ public class TouristCollision : MonoBehaviour
     public int key;
 	void Start()
     {
-        key = Random.Range(-1000,1000);
+        key = Random.Range(-1000,1000);                                         //sets keys for tourist collisions to be used with Keys script
 
 
         foreach (Transform child in transform)

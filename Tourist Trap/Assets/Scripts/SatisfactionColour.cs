@@ -8,7 +8,7 @@ public class SatisfactionColour : MonoBehaviour
     Satisfaction satScript;
     float colourchange;
     Renderer pRenderer;
-    void Awake()
+    void Awake()                                                                //changes colour of white circle to red as satisfaction goes down
     {
         satScript = GetComponentInParent<Satisfaction>();
         pRenderer = GetComponent<Renderer>();

@@ -15,14 +15,14 @@ public class GameMenu : MonoBehaviour
 
     void Start()
     {
-        panelObject.SetActive(true);
+        panelObject.SetActive(true);            //sets scene change panel to transparent
         panelCanvas.alpha = 0;
     }
 
 
 	void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))       //enables and disables the menu
         {
             menu = !menu;
             if(!menu)
@@ -42,7 +42,7 @@ public class GameMenu : MonoBehaviour
         }
 
 
-        if (mainMenuClicked)
+        if (mainMenuClicked)                                //fades out visuals and audio when changing scenes
         {
             if (AudioListener.volume > 0)
             {
@@ -61,7 +61,7 @@ public class GameMenu : MonoBehaviour
 
     void Menu()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0;             
         controlspanel.SetActive(true);
     }
 
@@ -83,17 +83,15 @@ public class GameMenu : MonoBehaviour
         mainMenuClicked = true;
     }
 
-    public void OnControls()
-    {
+    public void OnControls()                                    //sets animaitons for the control panel sliding in and out
+    {   
         anim.SetBool("ControlsClicked", true);
         anim.SetBool("ControlsShown", true);
 
-        //controlspanel.SetActive(true);
     }
     public void OffControls()
     {
         anim.SetBool("ControlsShown", false);
-        //controlspanel.SetActive(false);
     }
 }
 

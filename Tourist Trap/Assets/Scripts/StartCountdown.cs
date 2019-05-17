@@ -34,7 +34,7 @@ public class StartCountdown : MonoBehaviour
     }
 
 
-    void ShowNum()
+    void ShowNum()                                              //plays noises and displays countdown at start of game
     {
         if(number == 3)
         {

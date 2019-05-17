@@ -36,7 +36,7 @@ public class ExitMap : MonoBehaviour
 
 
 
-    public void Exit(GameObject exit)
+    public void Exit(GameObject exit)                                               //removes components so the game wont try to fail if it hits a group coming in
     {
         if (exiting) { return; }
         exiting = true;

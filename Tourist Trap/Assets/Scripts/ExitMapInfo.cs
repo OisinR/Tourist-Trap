@@ -11,7 +11,7 @@ public class ExitMapInfo : MonoBehaviour
 
 
 
-	public GameObject GetInfo()
+	public GameObject GetInfo()     //tells the outgoing groups which way to face
     {
 
         return lookPoint;

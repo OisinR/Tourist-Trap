@@ -21,7 +21,7 @@ public class DestinationChooser : MonoBehaviour
         waypointScript = GetComponent<MoveToWaypoint>();
         satScript = GetComponent<Satisfaction>();
         exitMapScript = GetComponent<ExitMap>();
-        destination = placestoGo[Random.Range(0, 4)];
+        destination = placestoGo[Random.Range(0, 4)];                                       //sets the tourist destination on spawn
         selected = false;
         uiText = GameObject.FindGameObjectWithTag("Destination").GetComponent<Text>();
         
@@ -38,7 +38,7 @@ public class DestinationChooser : MonoBehaviour
 
     public void TriggerReached(Collider other)
     {
-        if (other.tag == destination)
+        if (other.tag == destination)                                                               //if they've reached theit destination, lets the player know they can leave
         {
             reached = true;
             //Debug.Log("Reached");
@@ -48,7 +48,7 @@ public class DestinationChooser : MonoBehaviour
         if (other.tag == "Gate" && reached)
         {
             Debug.Log("Exit Attempted");
-            lookPoint = other.GetComponent<ExitMapInfo>().GetInfo();
+            lookPoint = other.GetComponent<ExitMapInfo>().GetInfo();    
             exitMapScript.Exit(lookPoint);
         }
 

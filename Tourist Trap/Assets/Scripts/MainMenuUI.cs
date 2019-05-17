@@ -13,11 +13,11 @@ public class MainMenuUI : MonoBehaviour {
     {
         Time.timeScale = 1;
         AudioListener.volume = 1;
-        panelCanvas.alpha = 0;
+        panelCanvas.alpha = 0;                                      //sets scene chaning panel to transparent
     }
 
     private void Update()
-    {
+    {                                                               //transitions to next scene
         if (startClicked)
         {
             if (AudioListener.volume > 0)
@@ -33,7 +33,7 @@ public class MainMenuUI : MonoBehaviour {
         }
     }
 
-    public void OnQuit()
+    public void OnQuit()                                    
     {
         Application.Quit();
     }
@@ -41,16 +41,14 @@ public class MainMenuUI : MonoBehaviour {
     {
         startClicked = true;
     }
-    public void OnControls()
+    public void OnControls()                                        //sets animaitons for controls panel
     {
         anim.SetBool("ControlsClicked", true);
         anim.SetBool("ControlsShown",true);
         
-        //controlspanel.SetActive(true);
     }
     public void OffControls()
     {
         anim.SetBool("ControlsShown", false);
-        //controlspanel.SetActive(false);
     }
 }

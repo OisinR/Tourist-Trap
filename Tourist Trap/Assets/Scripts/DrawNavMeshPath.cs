@@ -15,7 +15,7 @@ public class DrawNavMeshPath : MonoBehaviour
 
     void Update()
     {
-        if (path != null && path.Length > 1)
+        if (path != null && path.Length > 1)                                //draws out the path that the navmesh agent is going to take
         {
             lr.positionCount = path.Length;
             for (int i = 0; i < path.Length; i++)

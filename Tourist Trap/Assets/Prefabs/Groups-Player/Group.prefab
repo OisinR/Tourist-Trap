@@ -152,18 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoint: {fileID: 0}
   key: 0
---- !u!114 &4878772489301191548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383698391089215586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c9367fe9123fe438123410cc4ce64c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &5665145930016169751
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -881,18 +869,6 @@ MonoBehaviour:
   player: {fileID: 2100000, guid: 6569a71416df04642ae63fd826b1ea5b, type: 2}
   selected: {fileID: 2100000, guid: 3318245774044424d81ac0281066bfac, type: 2}
   Selrenderer: {fileID: 727414147557398224}
---- !u!114 &6873018571058076915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6629078136338519835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c9367fe9123fe438123410cc4ce64c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7599632170840957937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,18 +1199,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed0262ba5fcb8a44789b0a4d775e320a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8071230591496732621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8609962092397145758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c9367fe9123fe438123410cc4ce64c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8957304173975172745

@@ -14,8 +14,6 @@ public class Satisfaction : MonoBehaviour
     Text satisfactionText;
     public bool display;
     public bool waiting,going,atDest;
-    //to do later: replace these with states 
-
 
     void Awake()
     {
@@ -31,7 +29,7 @@ public class Satisfaction : MonoBehaviour
 
     void Update()
     {
-        if (agent != null && agent.hasPath)
+        if (agent != null && agent.hasPath)                                 //satisfaction goes down slower if the group is moving
         {
             going = true;
             waiting = false;

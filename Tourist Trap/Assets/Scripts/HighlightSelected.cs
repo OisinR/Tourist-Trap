@@ -9,7 +9,7 @@ public class HighlightSelected : MonoBehaviour
     public Renderer Selrenderer;
 
 
-	public void Selected()
+	public void Selected()                          //sets the circle under tourists to let the player know that they're selected
     {
         Selrenderer.material = selected;
 

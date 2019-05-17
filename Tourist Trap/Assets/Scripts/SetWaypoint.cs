@@ -20,35 +20,34 @@ public class SetWaypoint : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))                                                                //Right click
         {
             RaycastHit hit;
-            Ray ray = screenCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = screenCamera.ScreenPointToRay(Input.mousePosition);                               
 
             int layerMask = 1 << 9;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))                               //only hit the ground layer
             {
-                if (waypointScript != null)
+                if (waypointScript != null)                                                             
                 {
                     if (waypointScript.waypoint != null && waypointScript.waypoint.layer != 11)
                     {
-                        Destroy(waypointScript.waypoint);
+                        Destroy(waypointScript.waypoint);                                                //if theres already a waypoint, destroy it
                     }
-                    destination = Instantiate(prefab, hit.point, Quaternion.identity);
+                    destination = Instantiate(prefab, hit.point, Quaternion.identity);                  //set a new waypoint 
                     currentGroup.destinationWaypoint = destination;
                     currentGroup.Selected();
-                   // waypointScript.waypoint.GetComponent<Renderer>().material = waypointSelected;
                 }
             }
         }
-        if (Input.GetMouseButtonDown(0)) //Rightclick
+        if (Input.GetMouseButtonDown(0))                                                                //Left click
         {
             RaycastHit hit;
             Ray ray = screenCamera.ScreenPointToRay(Input.mousePosition);
-            int layerMask = 1 << 10;
+            int layerMask = 1 << 10;                                                                        //only hit characters
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
             {
-                if (first)
+                if (first)                                                                                          //if the first group sleceted in the game
                 {
                     first = false;
                     currentGroup = hit.transform.parent.gameObject.GetComponent<SelectedGroup>();
@@ -56,7 +55,7 @@ public class SetWaypoint : MonoBehaviour
                 }
                 else
                 {
-                    if (waypointScript.waypoint != null)
+                    if (waypointScript.waypoint != null)                                                            //if not, deselect the previous group
                     {
                         waypointScript.waypoint.GetComponent<Renderer>().material = waypointUnselected;
                     }

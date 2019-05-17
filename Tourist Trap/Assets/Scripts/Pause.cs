@@ -12,10 +12,9 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))                  //pauses the game on spacebar
         {
             paused = !paused;
         }

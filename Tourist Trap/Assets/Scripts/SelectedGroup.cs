@@ -11,7 +11,7 @@ public class SelectedGroup : MonoBehaviour
     public Component[] moveScripts;
     HighlightSelected[] highlight;
 
-	void Awake()
+	void Awake()                                                                    //displays various objects and text for the selected group
     {
         highlight = GetComponentsInChildren<HighlightSelected>();
         destChoose = GetComponent<DestinationChooser>();

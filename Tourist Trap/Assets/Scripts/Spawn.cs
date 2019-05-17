@@ -20,20 +20,19 @@ public class Spawn : MonoBehaviour
 
     private void Start()
     {
-        AudioListener.volume = 1;
+        AudioListener.volume = 1;                                                                       //resets volume after scene change
         canSpawn = true;
         scorescript = GameObject.FindGameObjectWithTag("Manager").GetComponent<Score>();
 
         Time.timeScale = 1;
-
-        maxTourists = 2;
+                                                                                            
+        maxTourists = 2;                                                                                //difficulty increases
         timeInterval1 = 30f;
         timeInterval2 = 60f;
         timeInterval3 = 90f;
         timedelay = 3f;
 
 
-        //InvokeRepeating("SpawnTourist", 2.0f, timedelay);
     }
 
     void FixedUpdate()
@@ -47,7 +46,7 @@ public class Spawn : MonoBehaviour
             buttonOver.SetActive(true);
         }
 
-        if (canSpawn && timedelay <= 0 && tourists < maxTourists)
+        if (canSpawn && timedelay <= 0 && tourists < maxTourists)                                   //time delay in between spawns
         {
             SpawnTourist();
             timedelay = 7f;
@@ -59,7 +58,7 @@ public class Spawn : MonoBehaviour
 
         timeCounter += Time.deltaTime;
 
-        if (timeCounter >= timeInterval1)
+        if (timeCounter >= timeInterval1)                                                           //difficulty increases number of tourists to deal with as time goes on
         {
             maxTourists = 4;
         }
@@ -73,14 +72,6 @@ public class Spawn : MonoBehaviour
         {
             maxTourists = 8;
         }
-
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("StartScene");
-        }
-        */
     }
 
     private void LateUpdate()
@@ -95,23 +86,14 @@ public class Spawn : MonoBehaviour
     {
         Debug.Log("SpawnAttempted");
         tourists++;
-        spawnNum = Random.Range(0, 4);
+        spawnNum = Random.Range(0, 4);                                                                      //spawns a tourist at a random spawnpoint
         Tourist = Instantiate(tourist, spawnpoints[spawnNum].transform.position, Quaternion.identity);
-
-
 
     }
 
-    public void touristOut()
+    public void touristOut()                                                                                //lets the spawnscript know when theres less tourists than the max
     {
         tourists--;
     }
 
-
-
-    public void RestartGame()
-    {
-        CancelInvoke();
-        SceneManager.LoadScene(0);
-    }
 }

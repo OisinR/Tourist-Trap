@@ -28,7 +28,7 @@ public class MoveToWaypoint : MonoBehaviour
 
 
 
-            foreach (Animator anim in animators)
+            foreach (Animator anim in animators)                                                                                        //tourist animations
             {
                 if (Vector3.Distance(anim.gameObject.transform.position, waypoint.gameObject.transform.position) > 1f)
                 {
@@ -44,7 +44,7 @@ public class MoveToWaypoint : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)                                                     //collisions
     {
         if (other == waypoint && other.gameObject.layer != 9)
         {
@@ -82,16 +82,6 @@ public class MoveToWaypoint : MonoBehaviour
         {
             
             safe = false;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log("Col");
-        if (collision.gameObject.tag == "Tourist" && !safe)
-        {
-            //Debug.Log("End");
-            //GameObject.FindGameObjectWithTag("Manager").GetComponent<Spawn>().gameover = true;
         }
     }
 
